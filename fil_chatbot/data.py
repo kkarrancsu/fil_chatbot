@@ -3,7 +3,8 @@
 from langchain.text_splitter import RecursiveCharacterTextSplitter
 from langchain_community.document_loaders import WebBaseLoader
 from langchain_community.vectorstores import Chroma
-from langchain_community.embeddings import GPT4AllEmbeddings
+# from langchain_community.embeddings import GPT4AllEmbeddings
+from langchain_google_genai import GoogleGenerativeAIEmbeddings
 from langchain.text_splitter import MarkdownTextSplitter
 from langchain.text_splitter import MarkdownHeaderTextSplitter
 
@@ -14,7 +15,7 @@ class VectorStoreManager:
     def __init__(self, persist_directory: str = "vector_store", embedding_fn=None):
         os.makedirs(persist_directory, exist_ok=True)
         if embedding_fn is None:
-            embedding_fn=GPT4AllEmbeddings()
+            embedding_fn=GoogleGenerativeAIEmbeddings(model="models/embedding-001")
         self.vector_store = Chroma(embedding_function=embedding_fn, persist_directory=persist_directory)
         self.injested_docs_hash_fp = os.path.join(persist_directory, "files.txt")
 
