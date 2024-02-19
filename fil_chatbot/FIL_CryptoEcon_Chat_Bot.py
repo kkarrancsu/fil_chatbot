@@ -38,15 +38,10 @@ with st.spinner('Loading Chatbot...'):
             max_tokens=16384,
         )
         st.session_state.llm = llm
-if 'prompt' in st.session_state:
-    prompt = st.session_state.prompt
-else:
-    prompt = hub.pull("rlm/rag-prompt")
-    st.session_state.prompt = prompt
 if 'ce_chatbot' in st.session_state:
     ce_chatbot = st.session_state.ce_chatbot
 else:
-    ce_chatbot = ChatBot(llm=llm, vector_store=vector_store, prompt=prompt)
+    ce_chatbot = ChatBot(llm=llm, vector_store=vector_store)
     st.session_state.ce_chatbot = ce_chatbot
 
 # st.title("🚀 A CE Chatbot")

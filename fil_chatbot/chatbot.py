@@ -47,7 +47,7 @@ def format_docs(docs):
     return "\n\n".join(doc.page_content for doc in docs)
 
 class ChatBot:
-    def __init__(self, llm: GPT4AllModel, vector_store: VectorStore, prompt: str = None):
+    def __init__(self, llm: GPT4AllModel, vector_store: VectorStore):
         # TODO: expand the model type to include other types ... I think 
         # langchain already has an abstraction for this
 
@@ -57,10 +57,6 @@ class ChatBot:
 
         # TODO: probably should convert this into a RAG configuration object
         self.retriever = self.vector_store.as_retriever(k=5)
-        if prompt is None:
-            self.prompt = hub.pull("rlm/rag-prompt")
-        else:
-            self.prompt = prompt
         self.model = llm
 
         qa_system_prompt = """
