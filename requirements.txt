@@ -1,4 +1,5 @@
 streamlit
 langchain
 langchain-google-genai
-chromadb
+pysqlite3
+chromadb==0.3.29
