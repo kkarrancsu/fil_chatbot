@@ -1,0 +1,1 @@
+{"lc": 1, "type": "constructor", "id": ["langchain", "schema", "document", "Document"], "kwargs": {"page_content": ":::warning\n:warning: Circulating supply is only 300M. Etherscan also consider tokens not yet vested not allocated.\n:::", "metadata": {}}}

@@ -1,0 +1,1 @@
+{"lc": 1, "type": "constructor", "id": ["langchain", "schema", "document", "Document"], "kwargs": {"page_content": "## References\n- [RBP Baseline Crossing](https://hackmd.io/@cryptoecon/BkytBgbIs?type=view)\n- [QAP Baseline Crossing](https://hackmd.io/@cryptoecon/SkICuaJK2?type=view)\n- Simulation notebook", "metadata": {}}}

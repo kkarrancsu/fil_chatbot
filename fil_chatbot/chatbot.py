@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 
-from data import VectorStoreManager as VectorStore
+from kb import KBManager
 from langchain_community.llms import GPT4All
 from langchain import hub
 from langchain_core.runnables import RunnableParallel, RunnablePassthrough
@@ -47,16 +47,14 @@ def format_docs(docs):
     return "\n\n".join(doc.page_content for doc in docs)
 
 class ChatBot:
-    def __init__(self, llm: GPT4AllModel, vector_store: VectorStore):
+    def __init__(self, llm: GPT4AllModel, kb: KBManager):
         # TODO: expand the model type to include other types ... I think 
         # langchain already has an abstraction for this
 
         # Retrieve and generate using the relevant snippets of the blog.
-        self.vector_store = vector_store.vector_store
+        self.retriever = kb.retriever
         self.chat_history = []
 
-        # TODO: probably should convert this into a RAG configuration object
-        self.retriever = self.vector_store.as_retriever(k=5)
         self.model = llm
 
         qa_system_prompt = """

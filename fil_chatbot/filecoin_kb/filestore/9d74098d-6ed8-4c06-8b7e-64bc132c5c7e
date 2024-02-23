@@ -1,0 +1,1 @@
+{"lc": 1, "type": "constructor", "id": ["langchain", "schema", "document", "Document"], "kwargs": {"page_content": "submit their messages, even if the price (in terms of base fee and miner tip) is too high, as long as the cost of doing so is smaller than the cost of getting penalised. We refer to this problem as *block space gentrification*.", "metadata": {}}}

@@ -1,0 +1,1 @@
+{"lc": 1, "type": "constructor", "id": ["langchain", "schema", "document", "Document"], "kwargs": {"page_content": "## When Filecoin Plus works and when it doesn't\nTo question when Filecoin Plus works, and to understand its limitations, and how its failure modes might be overcome, the following discussion is anchored with a set of example SP business profiles.", "metadata": {}}}

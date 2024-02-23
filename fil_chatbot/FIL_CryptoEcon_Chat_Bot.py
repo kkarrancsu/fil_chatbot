@@ -1,6 +1,6 @@
 import streamlit as st
 
-from data import VectorStoreManager as VectorStore
+from kb import KBManager
 from chatbot import ChatBot
 from langchain import hub
 import asyncio
@@ -23,16 +23,11 @@ def clear_history():
     st.session_state.ce_chatbot.clear_history()
 
 with st.spinner('Loading Knowledgebase...'):
-    if 'vector_store' in st.session_state:
-        vector_store = st.session_state.vector_store
+    if 'kb' in st.session_state:
+        kb = st.session_state.kb
     else:
-        cwd = os.getcwd()
-        full_path = os.path.join(cwd, "kb/cel/data/*.md")
-        documents = glob.glob(full_path)
-        vector_store = VectorStore(persist_directory="fil_chatbot/vector_store")
-        vector_store.update_vector_store(documents)
-        # vector_store = VectorStore(persist_directory="/home/kiran/code/cel/fil_chatbot/fil_chatbot/vector_store")
-        st.session_state.vector_store = vector_store
+        kb = KBManager(persist_directory="fil_chatbot/filecoin_kb")
+        st.session_state.kb = kb
 with st.spinner('Loading Chatbot...'):
     if 'llm' in st.session_state:
         llm = st.session_state.llm
@@ -47,7 +42,7 @@ with st.spinner('Loading Chatbot...'):
 if 'ce_chatbot' in st.session_state:
     ce_chatbot = st.session_state.ce_chatbot
 else:
-    ce_chatbot = ChatBot(llm=llm, vector_store=vector_store)
+    ce_chatbot = ChatBot(llm=llm, kb=kb)
     st.session_state.ce_chatbot = ce_chatbot
 
 # st.title("🚀 A CE Chatbot")

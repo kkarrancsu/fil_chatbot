@@ -1,0 +1,1 @@
+{"lc": 1, "type": "constructor", "id": ["langchain", "schema", "document", "Document"], "kwargs": {"page_content": "- Note that the absolute value of reward concentration is greater in the leave scenario than in the terminate scenario. Appendix - A1 discusses this in further detail.\n- FoFR follows directly from the other aspects discussed above.", "metadata": {}}}

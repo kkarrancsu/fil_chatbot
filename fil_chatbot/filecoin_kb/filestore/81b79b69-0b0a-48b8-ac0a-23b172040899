@@ -1,0 +1,1 @@
+{"lc": 1, "type": "constructor", "id": ["langchain", "schema", "document", "Document"], "kwargs": {"page_content": "### Problem and Solution\n\nThe motivation and solution are set out in the [FIP draft discussion](https://github.com/filecoin-project/FIPs/discussions/421). To make them clearer, following requests, the motivation is reiterated.\n\n**Problem**", "metadata": {}}}

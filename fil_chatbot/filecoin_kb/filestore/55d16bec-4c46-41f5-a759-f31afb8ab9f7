@@ -1,0 +1,1 @@
+{"lc": 1, "type": "constructor", "id": ["langchain", "schema", "document", "Document"], "kwargs": {"page_content": "* The exact dynamics depend on several factors including: (i) the cross-correlation of the rewards with the linear ramp, (ii) how quickly future storage costs decrease, and (iii) initial pledge dynamics.", "metadata": {}}}

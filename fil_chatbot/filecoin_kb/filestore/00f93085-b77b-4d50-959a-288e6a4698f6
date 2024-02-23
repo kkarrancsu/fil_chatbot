@@ -1,0 +1,1 @@
+{"lc": 1, "type": "constructor", "id": ["langchain", "schema", "document", "Document"], "kwargs": {"page_content": "* $\\tilde{S}_{\\tau}$ --- survival function of effective single lifetime of duration $\\tau$, not including renewals\n* $e_t$ is the probability of expiration\n* $r_t$ is the probability of renewal", "metadata": {}}}

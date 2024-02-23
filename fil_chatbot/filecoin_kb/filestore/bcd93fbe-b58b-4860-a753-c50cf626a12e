@@ -1,0 +1,1 @@
+{"lc": 1, "type": "constructor", "id": ["langchain", "schema", "document", "Document"], "kwargs": {"page_content": "We can use the formulas derived in the previous subsection to get the instanteneous issuance of new tokens from baseline minting:", "metadata": {}}}
