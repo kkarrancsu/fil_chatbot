@@ -17,6 +17,7 @@ os.environ["LANGCHAIN_TRACING_V2"] = "true"
 os.environ["LANGCHAIN_PROJECT"] = "fil_chatbot"
 os.environ["LANGCHAIN_ENDPOINT"] = "https://api.smith.langchain.com"
 os.environ["LANGCHAIN_API_KEY"] = "ls__df28b9de08c04342ad24c0d5423e8030"
+os.environ['GRPC_DNS_RESOLVER'] = 'native'  # seems to be needed for mac ... 
 
 def clear_history():
     st.session_state.pop("messages", None)

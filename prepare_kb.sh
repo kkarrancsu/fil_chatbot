@@ -77,7 +77,22 @@ for file in ${fip_folder}/FIPS/*.md; do
     fi
 done
 
+#### Process Filecoin Spec ####
+echo "Downloading Filecoin Spec ..."
+spec_folder=${kb_store_folder}/spec
+# if folder doesn't exist, clone the repo
+if [ ! -d "$spec_folder" ]; then
+    mkdir -p $spec_folder
+    git clone https://github.com/filecoin-project/specs.git $spec_folder
+fi
+# create symbolic links to all specs in the root knowledgebase folder
+for file in ${spec_folder}/content/*.md; do
+    if [ -f "$file" ]; then
+        abs_path=$(realpath $file)
+        ln -s $abs_path ${kb_data_folder}/$(basename $file)
+    fi
+done
 
-# # preprocess the data and injest the knowledge base
-# source activate llm
-# python3 prepare_kb.py
+# preprocess the data and injest the knowledge base
+source activate llm
+python3 prepare_kb.py
