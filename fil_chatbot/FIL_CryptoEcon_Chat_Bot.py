@@ -11,8 +11,8 @@ from langchain.callbacks.streaming_aiter import AsyncIteratorCallbackHandler
 from langchain_google_genai import ChatGoogleGenerativeAI
 
 import os
-import glob
 
+# TODO: move into secrets!
 os.environ["LANGCHAIN_TRACING_V2"] = "true"
 os.environ["LANGCHAIN_PROJECT"] = "fil_chatbot"
 os.environ["LANGCHAIN_ENDPOINT"] = "https://api.smith.langchain.com"
@@ -26,7 +26,7 @@ with st.spinner('Loading Knowledgebase...'):
     if 'kb' in st.session_state:
         kb = st.session_state.kb
     else:
-        kb = KBManager(persist_directory="fil_chatbot/filecoin_kb")
+        kb = KBManager(persist_directory="filecoin_kb")
         st.session_state.kb = kb
 with st.spinner('Loading Chatbot...'):
     if 'llm' in st.session_state:

@@ -1,1 +1,0 @@
-{"lc": 1, "type": "constructor", "id": ["langchain", "schema", "document", "Document"], "kwargs": {"page_content": "## Reward calculator \n\nThe reward calculator is the module responsible to computing the payouts to node operators. There are 5 main principles we used to design the module:", "metadata": {}}}

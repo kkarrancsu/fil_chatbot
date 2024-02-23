@@ -1,1 +1,0 @@
-{"lc": 1, "type": "constructor", "id": ["langchain", "schema", "document", "Document"], "kwargs": {"page_content": "## Notation\n\nBefore we detail how the model computes the total locked FIL, we need to define some notation that will be used throughout the document:", "metadata": {}}}

@@ -1,1 +1,0 @@
-{"lc": 1, "type": "constructor", "id": ["langchain", "schema", "document", "Document"], "kwargs": {"page_content": "```\nm1 = (max_onboard - min_onboard) / (max_roi - min_roi)\nrb_onboard = m1 * estimated_roi + offset1\nm2 = (max_renew - min_renew) / (max_roi - min_roi)\nrenew_pct = m2 * estimated_roi + offset2", "metadata": {}}}

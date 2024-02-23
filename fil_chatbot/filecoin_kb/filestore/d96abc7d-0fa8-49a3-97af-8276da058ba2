@@ -1,1 +1,0 @@
-{"lc": 1, "type": "constructor", "id": ["langchain", "schema", "document", "Document"], "kwargs": {"page_content": "1. The reward paid to node $i$ is $r_i = S(m_i) \\cdot R$\n2. $\\sum_{i=1}^n S(m_i) = 1$\n\nBefore detailing the scoring functions, we need to define the service metrics. In Saturn, service can be measured by three main metrics:", "metadata": {}}}

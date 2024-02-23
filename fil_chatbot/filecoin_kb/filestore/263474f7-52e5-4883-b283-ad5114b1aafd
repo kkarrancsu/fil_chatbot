@@ -1,1 +1,0 @@
-{"lc": 1, "type": "constructor", "id": ["langchain", "schema", "document", "Document"], "kwargs": {"page_content": "The next table describes all the heuristics proposed to be included in the detection system and highlights the reasoning for each heuristic. It is important to note that this is a first proposal, and it is likely to change as the project matures.", "metadata": {}}}

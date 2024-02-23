@@ -1,1 +1,0 @@
-{"lc": 1, "type": "constructor", "id": ["langchain", "schema", "document", "Document"], "kwargs": {"page_content": "6. **V3-ExploitFIL+** - This is similar to V2-ExploitFIL+, but in this case, we add a hypothetical slashing fee for abusing the FIL+ program.", "metadata": {}}}

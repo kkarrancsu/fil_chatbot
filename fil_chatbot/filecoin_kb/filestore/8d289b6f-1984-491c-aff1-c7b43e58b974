@@ -1,1 +1,0 @@
-{"lc": 1, "type": "constructor", "id": ["langchain", "schema", "document", "Document"], "kwargs": {"page_content": "| Buy and burn | Fees are denominated in another token (usually USD) and paid to the protocol. The protocol sells the tokens to purchase the native token. Fees in the native token are burned | Token demand | High | Medium |", "metadata": {}}}

@@ -1,1 +1,0 @@
-{"lc": 1, "type": "constructor", "id": ["langchain", "schema", "document", "Document"], "kwargs": {"page_content": "independence, etc). This is what happens under the hood when you use `numpy.random.random()` in Python, for example (via the [Marsenne-Twister](https://en.wikipedia.org/wiki/Mersenne_Twister) algorithm.", "metadata": {}}}
