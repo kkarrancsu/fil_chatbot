@@ -13,6 +13,11 @@ from langchain_google_genai import ChatGoogleGenerativeAI
 import os
 import glob
 
+os.environ["LANGCHAIN_TRACING_V2"] = "true"
+os.environ["LANGCHAIN_PROJECT"] = "fil_chatbot"
+os.environ["LANGCHAIN_ENDPOINT"] = "https://api.smith.langchain.com"
+os.environ["LANGCHAIN_API_KEY"] = "ls__df28b9de08c04342ad24c0d5423e8030"
+
 def clear_history():
     st.session_state.pop("messages", None)
     st.session_state.ce_chatbot.clear_history()
@@ -22,10 +27,11 @@ with st.spinner('Loading Knowledgebase...'):
         vector_store = st.session_state.vector_store
     else:
         cwd = os.getcwd()
-        full_path = os.path.join(cwd, "fil_chatbot/kb/gas/*.md")
-        gas_documents = glob.glob(full_path)
-        vector_store = VectorStore(persist_directory="./vector_store")
-        vector_store.update_vector_store(gas_documents)
+        full_path = os.path.join(cwd, "kb/cel/data/*.md")
+        documents = glob.glob(full_path)
+        vector_store = VectorStore(persist_directory="fil_chatbot/vector_store")
+        vector_store.update_vector_store(documents)
+        # vector_store = VectorStore(persist_directory="/home/kiran/code/cel/fil_chatbot/fil_chatbot/vector_store")
         st.session_state.vector_store = vector_store
 with st.spinner('Loading Chatbot...'):
     if 'llm' in st.session_state:
