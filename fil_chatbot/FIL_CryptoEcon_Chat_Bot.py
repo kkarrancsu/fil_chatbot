@@ -35,9 +35,9 @@ with st.spinner('Loading Chatbot...'):
     else:
         llm = ChatGoogleGenerativeAI(
             model="gemini-pro",
-            temperature=0,
+            temperature=0.2,
             convert_system_message_to_human=True,
-            max_tokens=16384,
+            max_tokens=4096,
         )
         st.session_state.llm = llm
 if 'ce_chatbot' in st.session_state:

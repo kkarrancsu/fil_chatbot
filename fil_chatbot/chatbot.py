@@ -46,6 +46,20 @@ class GPT4AllModel:
 def format_docs(docs):
     return "\n\n".join(doc.page_content for doc in docs)
 
+"""
+Things to optimize:
+1 - reducing hallucinations
+
+Next Steps:
+1 - include more static context.  I observe that initial queries usually fail, but subsequent queries don't when 
+the user provides more details/context.  This should be automated so that it is easier to use.
+
+2 - improve the information retrieval from the KB, as that will be the main source of context.
+     try hybrid search (keyword + semantic)
+
+3 - think about how to setup evaluation.  do we need user input Q/A to create assessments.
+"""
+
 class ChatBot:
     def __init__(self, llm: GPT4AllModel, kb: KBManager):
         # TODO: expand the model type to include other types ... I think 
@@ -58,8 +72,10 @@ class ChatBot:
         self.model = llm
 
         qa_system_prompt = """
-        You are an expert in cryptocurrencies, economics, and cryptoeconomics and need to answer questions about these topics. Use the following pieces of retrieved context to answer the question. \ If you don't know the answer, just say that you don't know. \
-        Use five sentences maximum and keep the answer concise.\
+        You are an expert in cryptocurrencies, economics, cryptoeconomics and Filecoin. \
+        Use the following context and your knowledge of Filecoin, describe the question in detail first, and then attempt to answer the question. \ 
+        If you don't know the answer, do not making anything up, just say that you don't know. \
+        Keep the answer concise.\
 
         {context}"""
         qa_prompt = ChatPromptTemplate.from_messages(
