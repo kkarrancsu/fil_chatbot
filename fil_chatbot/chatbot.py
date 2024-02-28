@@ -47,17 +47,31 @@ def format_docs(docs):
     return "\n\n".join(doc.page_content for doc in docs)
 
 """
-Things to optimize:
-1 - reducing hallucinations
+Focus on reducing hallucinations!
 
 Next Steps:
 1 - include more static context.  I observe that initial queries usually fail, but subsequent queries don't when 
 the user provides more details/context.  This should be automated so that it is easier to use.
 
 2 - improve the information retrieval from the KB, as that will be the main source of context.
-     try hybrid search (keyword + semantic)
+     - try hybrid search (keyword + semantic)
+     - rank documents based on a trust score
+     - https://blog.vespa.ai/improving-text-ranking-with-few-shot-prompting/
+     - remove stop words from the query going into the IR
 
-3 - think about how to setup evaluation.  do we need user input Q/A to create assessments.
+3 - numbers are big source of halluciations.
+
+Evaluation Framework
+ - Evaluate each step of process separately.  Separate IR evaluation, etc ...
+ - Invest time in creating a great evaluation data-set
+ - OpenAI Evals and Langchain Auto Evaluator
+ - Adversarial Testing - I don't know is better than incorrect answer for RAG applications.
+
+ Paper - ReQA: An evaluation for End-to-End answer retrieval models
+
+ Good IR Evaluation Models/Practices
+  - Care more about precision than recall, b/c you don't want to feed in too much context
+  - 
 """
 
 class ChatBot:

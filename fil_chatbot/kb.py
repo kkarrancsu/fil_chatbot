@@ -34,26 +34,16 @@ class KBManager:
             persist_directory=vectorstore_dir
         )
         self.injested_docs_hash_fp = os.path.join(persist_directory, "files.txt")
-        parent_splitter = RecursiveCharacterTextSplitter(chunk_size=2000, chunk_overlap=200)
-        child_splitter = RecursiveCharacterTextSplitter(chunk_size=400)
+        # parent_splitter = RecursiveCharacterTextSplitter(chunk_size=2000, chunk_overlap=200)
+        # child_splitter = RecursiveCharacterTextSplitter(chunk_size=400)
+        parent_splitter = MarkdownTextSplitter(chunk_size=2000, chunk_overlap=200)
+        child_splitter = MarkdownTextSplitter(chunk_size=400)
         self.retriever = ParentDocumentRetriever(
             vectorstore=self.vector_store,
             docstore=store,
             child_splitter=child_splitter,
             parent_splitter=parent_splitter,
         )
-
-    # def get_retriever(self):
-    #     # old
-    #     # return self.vector_store.as_retriever(k=5)
-    #     # new
-    #     child_splitter = RecursiveCharacterTextSplitter(chunk_size=400)
-    #     store = InMemoryStore()
-    #     retriever = ParentDocumentRetriever(
-    #         vectorstore=self.vector_store,
-    #         docstore=store,
-    #         child_splitter=child_splitter,
-    #     )
 
     def compute_file_hash(self, file_path: str) -> str:
         """
@@ -85,11 +75,13 @@ class KBManager:
             ("#", "Header 1"),
             ("##", "Header 2"),
             ("###", "Header 3"),
+            ("####", "Header 4"),
+            ("#####", "Header 5"),
         ]
-        markdown_splitter = MarkdownHeaderTextSplitter(
+        markdown_header_splitter = MarkdownHeaderTextSplitter(
             headers_to_split_on=headers_to_split_on, strip_headers=False
         )
-        markdown_splitter = MarkdownTextSplitter(chunk_size=1024, chunk_overlap=128)
+        # markdown_splitter = MarkdownTextSplitter(chunk_size=1024, chunk_overlap=128)
 
         existing_file_hashes = []
         if os.path.exists(self.injested_docs_hash_fp):
@@ -108,9 +100,11 @@ class KBManager:
                 assert os.path.exists(fp), f"File not found: {fp}"
                 assert os.path.splitext(fp)[1] == ".md", f"Invalid file type: {fp}"
                 markdown_text = open(fp, "r").read()
-                md_header_splits = markdown_splitter.split_text(markdown_text)
-                docs = markdown_splitter.create_documents(md_header_splits)
+                docs = markdown_header_splitter.split_text(markdown_text)
                 new_docs.extend(docs)
+                # md_header_splits = markdown_header_splitter.split_text(markdown_text)
+                # docs = markdown_splitter.create_documents(md_header_splits)
+                # new_docs.extend(docs)
 
             # Add new documents to the vector store
             # self.vector_store.add_documents(new_docs)
