@@ -37,7 +37,7 @@ class KBManager:
         # parent_splitter = RecursiveCharacterTextSplitter(chunk_size=2000, chunk_overlap=200)
         # child_splitter = RecursiveCharacterTextSplitter(chunk_size=400)
         parent_splitter = MarkdownTextSplitter(chunk_size=2000, chunk_overlap=200)
-        child_splitter = MarkdownTextSplitter(chunk_size=400)
+        child_splitter = MarkdownTextSplitter(chunk_size=400)   
         self.retriever = ParentDocumentRetriever(
             vectorstore=self.vector_store,
             docstore=store,
