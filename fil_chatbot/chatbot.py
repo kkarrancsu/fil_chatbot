@@ -46,6 +46,9 @@ class GPT4AllModel:
 def format_docs(docs):
     return "\n\n".join(doc.page_content for doc in docs)
 
+def _parse_rewrite(text):
+    return text.strip("**")
+
 """
 Focus on reducing hallucinations!
 
@@ -112,10 +115,20 @@ class ChatBot:
         )
         self.contextualize_q_chain = contextualize_q_prompt | llm | StrOutputParser()
 
+        # TODO: evaluate whether the rewriter makes your IR better or not ...
+        ir_rewrite_template = """Provide a better search query for \
+        web search engine to answer the given question, end \
+        the queries with ’**’. Question: \
+        {x} Answer:"""
+        rewrite_prompt = ChatPromptTemplate.from_template(ir_rewrite_template)
+        rewriter = rewrite_prompt | llm | StrOutputParser() | _parse_rewrite
+
+        # try: https://cobusgreyling.medium.com/a-new-prompt-engineering-technique-has-been-introduced-called-step-back-prompting-b00e8954cacb
+
         # the general pipeline
         self.rag_chain = (
             RunnablePassthrough.assign(
-                context=self.contextualized_question | self.retriever | format_docs
+                context=self.contextualized_question | rewriter | self.retriever | format_docs
             )
             | qa_prompt
             | llm
@@ -125,11 +138,16 @@ class ChatBot:
     def clear_history(self):
         self.chat_history = []
 
+    # def contextualized_question(self, input: dict):
+    #     if input.get("chat_history"):
+    #         return self.contextualize_q_chain
+    #     else:
+    #         return input["question"]
     def contextualized_question(self, input: dict):
         if input.get("chat_history"):
-            return self.contextualize_q_chain
+            return {"x": self.contextualize_q_chain}
         else:
-            return input["question"]
+            return {"x": input["question"]}
 
     def format_docs(self, docs):
         return "\n\n".join(doc.page_content for doc in docs)

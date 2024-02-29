@@ -16,23 +16,26 @@ cel_data_folder=${cel_root_folder}/data
 mkdir -p $cel_root_folder
 mkdir -p $cel_data_folder
 
-# Download the knowledge base
-echo "Downloading CEL knowledge base from HackMD ..."
-token=$(cat $hackmd_auth_token_fp)
-echo $token
-flist=${cel_root_folder}/flist.json
-curl "https://api.hackmd.io/v1/teams/cryptoecon/notes" -H "Authorization: Bearer ${token}" > $flist
+####
+# TODO: it would be good to only download if new files have been added or files changed
+####
+# # Download the knowledge base
+# echo "Downloading CEL knowledge base from HackMD ..."
+# token=$(cat $hackmd_auth_token_fp)
+# echo $token
+# flist=${cel_root_folder}/flist.json
+# curl "https://api.hackmd.io/v1/teams/cryptoecon/notes" -H "Authorization: Bearer ${token}" > $flist
 
-# now use JQ to parse out the publish links
-jq -r '.[] | .publishLink' $flist > ${cel_root_folder}/publish_links.txt
+# # now use JQ to parse out the publish links
+# jq -r '.[] | .publishLink' $flist > ${cel_root_folder}/publish_links.txt
 
-# download the data
-while read -r line; do
-  mdpath=$line/download
-  echo "Downloading $line"
-  curl -L $mdpath > ${cel_data_folder}/$(basename $line.md)
-  sleep 1
-done < ${cel_root_folder}/publish_links.txt
+# # download the data
+# while read -r line; do
+#   mdpath=$line/download
+#   echo "Downloading $line"
+#   curl -L $mdpath > ${cel_data_folder}/$(basename $line.md)
+#   sleep 1
+# done < ${cel_root_folder}/publish_links.txt
 
 # clean up (remove some files that shouldn't be in the KB, primarily link files)
 rm -f ${cel_data_folder}/almanac.md
@@ -85,11 +88,14 @@ if [ ! -d "$spec_folder" ]; then
     mkdir -p $spec_folder
     git clone https://github.com/filecoin-project/specs.git $spec_folder
 fi
+
 # create symbolic links to all specs in the root knowledgebase folder
-for file in ${spec_folder}/content/*.md; do
-    if [ -f "$file" ]; then
-        abs_path=$(realpath $file)
-        ln -s $abs_path ${kb_data_folder}/$(basename $file)
+for file in $(find "${kb_store_folder}/spec/content" -type f -name "*.md"); do
+    if [[ "$filename" != _* ]]; then
+        if [ -f "$file" ]; then
+            abs_path=$(realpath $file)
+            ln -s $abs_path ${kb_data_folder}/$(basename $file)
+        fi
     fi
 done
 
